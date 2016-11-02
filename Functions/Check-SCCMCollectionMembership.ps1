@@ -9,7 +9,7 @@
 
         $CollectionMembers = Get-CMCollectionMember -CollectionName $Collection -ErrorAction Stop | foreach { $_.Name } | Sort-Object
 
-        If($CollectionMembers.Contains($ComputerName))
+        If($CollectionMembers -and $CollectionMembers.Contains($ComputerName))
         {
             Break
         }
