@@ -1,0 +1,2 @@
+VMName,CPUs,RAM,DiskSizeMB,DiskProvisioning,ISO,Cluster,DataStore,GuestID,VLAN
+DeployUpdates02,2,4096,81920,Thin,,,,,,
