@@ -28,8 +28,6 @@ To use the script, copy the project's folder to a workstation that can connect t
 
 ## Issues
 
-**No SCCM task sequence available to virtual machine after start up:** When the script adds the computer to the SCCM collection with the task sequence deployed to it, the script updates the collection to make sure the virtual machine appears as a member of the collection before continuing.  If there is no task sequence available to the virtual machine, check the SCCM console to make sure the virtual machine is a member of the collection with the task sequence deployed to it.
-
 **ISO hard coded in function:** The ISO information is hard coded into the New-VirtualMachine function located in .\Functions\New-VirtualMachine.ps1.  I am working on extracting that information from the script and either allowing the user to specify the value or create logic to set the value.
 
 **SCCM collections hard coded in function:** The collection names that have the SCCM task sequence deployed to them are currently hard coded in the Add-SystemToSCCM function located in .\Functions\Add-SystemToSCCM.ps1.  I am working on extracting that information from the script and either allowing the user to specify the value or create logic to set the value.
