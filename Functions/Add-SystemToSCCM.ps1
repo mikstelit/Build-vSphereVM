@@ -16,6 +16,7 @@
         
         Import-CMComputerInformation -CollectionName $CollectionName -ComputerName $HostName -MacAddress $MACAddress
 
+        Check-SCCMCollectionMembership $VM.VMName $BaseSCCMCollection $SiteCode $SCCMServer
         Check-SCCMCollectionMembership $VM.VMName $CollectionName $SiteCode $SCCMServer
     }
     Catch
