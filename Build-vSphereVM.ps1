@@ -49,15 +49,15 @@ Param
 ( 
     [Parameter(Mandatory=$False,
                Position=0)]
-    [string]$vCenter = 'vCenter.example.com',
+    [string]$vCenter = 'vCenter-SRV1.vmad.vmmc.org',
 
     [Parameter(Mandatory=$False,
                Position=1)]
-    [string]$SCCMServer = 'SCCM01',
+    [string]$SCCMServer = 'SCCMSS01',
 
     [Parameter(Mandatory=$False,
                Position=2)]
-    [string]$SiteCode = 'Site01',
+    [string]$SiteCode = 'C01',
 
     [Parameter(Mandatory=$False,
                Position=3)]
@@ -76,7 +76,7 @@ Param
 Try
 {
     Add-PSSnapin VMware.VimAutomation.Core -ErrorAction Stop
-    Import-Module $SCCMModuleLocation
+    Import-Module $SCCMModuleLocation -ErrorAction Stop
 
     $ServerData = "$PSScriptRoot\$InputData "
     $VMs = Import-Csv $ServerData -ErrorAction Stop
