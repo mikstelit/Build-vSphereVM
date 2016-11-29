@@ -49,15 +49,15 @@ Param
 ( 
     [Parameter(Mandatory=$False,
                Position=0)]
-    [string]$vCenter = 'vCenter-SRV1.vmad.vmmc.org',
+    [string]$vCenter = '',
 
     [Parameter(Mandatory=$False,
                Position=1)]
-    [string]$SCCMServer = 'SCCMSS01',
+    [string]$SCCMServer = '',
 
     [Parameter(Mandatory=$False,
                Position=2)]
-    [string]$SiteCode = 'C01',
+    [string]$SiteCode = '',
 
     [Parameter(Mandatory=$False,
                Position=3)]
@@ -92,21 +92,26 @@ Catch
     Exit
 }
 
-Get-VMBuildInformation $VMs
-
-Foreach ($VM in $VMs)
+Try
 {
-    Try
+    Get-VMBuildInformation $VMs
+
+    Foreach ($VM in $VMs)
     {
         New-VirtualMachine $VM
-        Set-Location "$($SiteCode):"
+    }
+
+    Set-Location "$($SiteCode):"
+
+    Foreach ($VM in $VMs)
+    {
         Add-SystemToSCCM $VM $BaseSCCMCollection $SiteCode $SCCMServer
     }
-    Catch
-    {
-        Write-Host $Error[0].Exception.Message
-    }
-}
 
-Set-Location $OriginalWorkingDirectory
-Disconnect-VIServer $vCenter -Confirm:$false
+    Set-Location $OriginalWorkingDirectory
+    Disconnect-VIServer $vCenter -Confirm:$false
+}
+Catch
+{
+    Write-Host $Error[0].Exception.Message
+}
